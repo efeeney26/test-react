@@ -1,7 +1,10 @@
 import * as types from '../action-types'
 
-const addTodo = (text) => {
-  return { type: types.ADD_TODO, text }
-}
+let nextTodoId = 0
+const addTodo = (text) => ({
+  type: types.ADD_TODO,
+  id: nextTodoId++,
+  text
+})
 
 export default addTodo

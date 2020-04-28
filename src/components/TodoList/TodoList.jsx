@@ -1,16 +1,17 @@
-import React, { useCallback } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import Todo from '../Todo/Todo'
 
-const TodoList = ({ todos, onTodoClick }) => {
-  const handleTodoClick = useCallback((todo) => onTodoClick(todo.id), [todos])
+const TodoList = ({ todos, toggleTodo }) => {
+  const handleClick = (todo) => () => toggleTodo(todo.id)
   return (
     <ul>
-      {todos.map((todo) => (
+      {todos?.length && todos.map((todo) => (
         <Todo
           key={todo.id}
           {...todo}
-          onClick={handleTodoClick}/>
+          onClick={handleClick(todo)}
+        />
       ))}
     </ul>
   )
@@ -24,7 +25,7 @@ TodoList.propTypes = {
       text: PropTypes.string.isRequired
     }).isRequired
   ).isRequired,
-  onTodoClick: PropTypes.func.isRequired
+  toggleTodo: PropTypes.func.isRequired
 }
 
 export default TodoList
