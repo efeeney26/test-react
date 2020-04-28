@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { actions } from '../../__data__'
 
-let AddTodo = ({ dispatch }) => {
+let AddTodo = ({ addTodo }) => {
   let input
 
   return (
@@ -14,7 +14,7 @@ let AddTodo = ({ dispatch }) => {
           if (!input.value.trim()) {
             return
           }
-          dispatch(actions.addTodo(input.value))
+          addTodo(input.value)
           input.value = ''
         }}
       >
@@ -30,9 +30,13 @@ let AddTodo = ({ dispatch }) => {
 }
 
 AddTodo.propTypes = {
-  dispatch: PropTypes.func.isRequired
+  addTodo: PropTypes.func.isRequired
 }
 
-AddTodo = connect()(AddTodo)
+const mapDispatchToProps = {
+  addTodo: actions.addTodo
+}
+
+AddTodo = connect(null, mapDispatchToProps)(AddTodo)
 
 export default AddTodo

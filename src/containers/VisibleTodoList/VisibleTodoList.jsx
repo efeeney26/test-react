@@ -6,8 +6,8 @@ const mapStateToProps = state => ({
   todos: selectors.getVisibleTodos(state.todos, state.visibilityFilter)
 })
 
-const mapDispatchToProps = dispatch => ({
-  toggleTodo: id => dispatch(actions.toggleTodo(id))
-})
+const mapDispatchToProps = {
+  toggleTodo: actions.toggleTodo
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(TodoList)

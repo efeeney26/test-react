@@ -5,15 +5,17 @@ import Todo from '../Todo/Todo'
 const TodoList = ({ todos, toggleTodo }) => {
   const handleClick = (todo) => () => toggleTodo(todo.id)
   return (
-    <ul>
-      {todos?.length && todos.map((todo) => (
-        <Todo
-          key={todo.id}
-          {...todo}
-          onClick={handleClick(todo)}
-        />
-      ))}
-    </ul>
+    todos?.length
+      ? <ul>
+        {todos.map((todo) => (
+          <Todo
+            key={todo.id}
+            {...todo}
+            onClick={handleClick(todo)}
+          />
+        ))}
+      </ul>
+      : null
   )
 }
 
