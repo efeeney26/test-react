@@ -2,8 +2,8 @@ import { connect } from 'react-redux'
 import { actions, selectors } from '../../__data__'
 import { TodoList } from '../../components'
 
-const mapStateToProps = state => ({
-  todos: selectors.getVisibleTodos(state.todos, state.visibilityFilter)
+const mapStateToProps = (state, ownProps) => ({
+  todos: selectors.getVisibleTodos(state.todos, ownProps.filter)
 })
 
 const mapDispatchToProps = {
