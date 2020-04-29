@@ -1,8 +1,12 @@
 import React from 'react'
 import logo from './logo.svg'
 import './App.css'
+import { store, actions } from './__data__'
 
 function App () {
+  console.log('store', store.getState())
+  store.dispatch(actions.fetchPosts('reactjs'))
+
   return (
     <div className="App">
       <header className="App-header">
