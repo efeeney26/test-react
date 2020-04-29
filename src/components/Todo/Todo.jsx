@@ -7,7 +7,7 @@ const Todo = ({ onClick, completed, text }) => (
   text &&
   <li
     onClick={onClick}
-    className={completed ? styles.todoItem : null}
+    className={completed ? styles.todoItemCompleted : styles.todoItem}
   >
     {text}
   </li>

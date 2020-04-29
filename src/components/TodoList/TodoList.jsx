@@ -2,7 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Todo from '../Todo/Todo'
 
-const TodoList = ({ todos, toggleTodo }) => {
+const TodoList = (props) => {
+  const { todos, toggleTodo } = props
   const handleClick = (todo) => () => toggleTodo(todo.id)
   return (
     todos?.length
