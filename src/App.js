@@ -33,7 +33,7 @@ function App (props) {
         )}
       </p>
       {isFetching && <h2>Loading...</h2>}
-      {!isFetching && <h2>Empty.</h2>}
+      {!isFetching && posts.length === 0 && <h2>Empty.</h2>}
       {posts?.length && (
         <div style={{ opacity: isFetching ? 0.5 : 1 }}>
           <Posts posts={posts} />
