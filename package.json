@@ -17,6 +17,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "cy:open": "npx cypress open",
+    "cy:run": "npx cypress run -b chrome",
     "eject": "react-scripts eject",
     "eslint:fix": "npx eslint --ext .js,.jsx . --fix"
   },
