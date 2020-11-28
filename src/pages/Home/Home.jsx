@@ -1,5 +1,4 @@
 import React, { useCallback, useState } from 'react'
-import { Link } from 'react-router-dom'
 
 import { Title, Button, Tooltip } from '../../components'
 
@@ -20,7 +19,6 @@ const Home = () => {
       <Button title='Button' onClick={onButtonClick}/>
       {isTooltipVisible && <Tooltip/>}
       <br/><br/>
-      <Link to="/about">About</Link>
     </div>
   )
 }
