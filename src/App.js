@@ -1,6 +1,7 @@
 import React from 'react'
 import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
+import AcUnitIcon from '@material-ui/icons/AcUnit'
 import { makeStyles } from '@material-ui/core'
 
 import { Header, Main } from './sections'
@@ -12,10 +13,13 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'center',
-    '$ > *': {
-      margin: theme.spacing(1)
-    }
+    justifyContent: 'center'
+  },
+  paper: {
+    padding: theme.spacing(2),
+    textAlign: 'center',
+    backgroundColor: 'blue',
+    color: 'white'
   }
 }))
 
@@ -84,6 +88,17 @@ function App () {
           Secondary
         </Button>
       </div>
+      <Grid
+        container
+        justify='space-around'
+      >
+        <Grid item>
+          <AcUnitIcon color='primary'/>
+        </Grid>
+        <Grid item>
+          <AcUnitIcon color='secondary'/>
+        </Grid>
+      </Grid>
     </>
   )
 }
