@@ -1,6 +1,10 @@
 import React from 'react'
-import { useFormik } from 'formik'
+import { useFormik, Form, Formik } from 'formik'
 import * as Yup from 'yup'
+
+import TextInput from '../TextInput/TextInput'
+import Checkbox from '../Checkbox/Checkbox'
+import Select from '../Select/Select'
 
 import style from './SignupForm.module.css'
 
@@ -35,73 +39,76 @@ const scheme = Yup.object({
         .max(20, 'Must be 20 characters or less')
         .required('Required'),
     email: Yup.string().email('Invalid email address').required('Required'),
+    acceptedTerms: Yup.boolean()
+        .required('Required')
+        .oneOf([true], 'You must accept the terms and conditions.'),
+    jobType: Yup.string()
+        .oneOf(
+            ['designer', 'development', 'product', 'other'],
+            'Invalid Job Type'
+        )
+        .required('Required')
 })
 
 const SignupForm = (props) => {
-    const formik = useFormik({
-        initialValues: {
-            firstName: '',
-            lastName: '',
-            email: '',
-        },
-        validationSchema: scheme,
-        onSubmit: values => {
-            console.log(JSON.stringify(values, null, 2))
-        },
-    })
-
     return (
-        <form
-            onSubmit={formik.handleSubmit}
-            className={style.form}
+        <Formik
+            initialValues={{
+                firstName: '',
+                lastName: '',
+                email: '',
+                acceptedTerms: false, // added for our checkbox
+                jobType: '', // added for our select
+            }}
+            validationSchema={scheme}
+            onSubmit={(values, { setSubmitting }) => {
+                setTimeout(() => {
+                    alert(JSON.stringify(values, null, 2))
+                    setSubmitting(false)
+                }, 400)
+            }}
         >
-            <div
-                className={style.field}
+            <Form
+                className={style.form}
             >
-                <label htmlFor="firstName">First Name</label>
-                <input
-                    id="firstName"
+                <TextInput
+                    label="First Name"
                     name="firstName"
                     type="text"
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values.firstName}
+                    placeholder="Jane"
                 />
-                {formik.touched.firstName && formik.errors.firstName ? <div style={{ color: 'red' }}>{formik.errors.firstName}</div> : null}
-            </div>
 
-            <div
-                className={style.field}
-            >
-                <label htmlFor="lastName">Last Name</label>
-                <input
-                    id="lastName"
+                <TextInput
+                    label="Last Name"
                     name="lastName"
                     type="text"
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values.lastName}
+                    placeholder="Doe"
                 />
-                {formik.touched.lastName && formik.errors.lastName ? <div style={{ color: 'red' }}>{formik.errors.lastName}</div> : null}
-            </div>
 
-            <div
-                className={style.field}
-            >
-                <label htmlFor="email">Email Address</label>
-                <input
-                    id="email"
+                <TextInput
+                    label="Email Address"
                     name="email"
                     type="email"
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values.email}
+                    placeholder="jane@formik.com"
                 />
-                {formik.touched.email && formik.errors.email ? <div style={{ color: 'red' }}>{formik.errors.email}</div> : null}
-            </div>
 
-            <button type="submit">Submit</button>
-        </form>
+                <Select label="Job Type"
+                    name="jobType"
+                >
+                    <option value="">Select a job type</option>
+                    <option value="designer">Designer</option>
+                    <option value="development">Developer</option>
+                    <option value="product">Product Manager</option>
+                    <option value="other">Other</option>
+                </Select>
+
+                <Checkbox name="acceptedTerms">
+                    I accept the terms and conditions
+                </Checkbox>
+
+                <button type="submit">Submit</button>
+            </Form>
+        </Formik>
     )
 }
 
