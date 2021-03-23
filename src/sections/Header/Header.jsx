@@ -6,28 +6,28 @@ import Typography from '@material-ui/core/Typography'
 import AcUnitIcon from '@material-ui/icons/AcUnit'
 
 const useStyles = makeStyles({
-  typography: {
-    flex: 1
-  }
+    typography: {
+        flex: 1
+    }
 })
 
 const Header = () => {
-  const classes = useStyles()
+    const classes = useStyles()
 
-  return (
-    <AppBar
-      position="static"
-    >
-      <Toolbar>
-        <Typography
-          className={classes.typography}
+    return (
+        <AppBar
+            position="static"
         >
-          This is Header
-        </Typography>
-        <AcUnitIcon />
-      </Toolbar>
-    </AppBar>
-  )
+            <Toolbar>
+                <Typography
+                    className={classes.typography}
+                >
+                    This is Header
+                </Typography>
+                <AcUnitIcon />
+            </Toolbar>
+        </AppBar>
+    )
 }
 
 export default Header

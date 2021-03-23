@@ -4,32 +4,32 @@ import Typography from '@material-ui/core/Typography'
 import { makeStyles, useTheme } from '@material-ui/core'
 
 const useStyles = makeStyles({
-  gutterBottom: {
-    color: 'blue',
-    marginTop: '1rem'
-  }
+    gutterBottom: {
+        color: 'blue',
+        marginTop: '1rem'
+    }
 })
 
 const CoolTypography = ({ title, ...props }) => {
-  const classes = useStyles()
-  const theme = useTheme()
-  console.log('theme', theme)
+    const classes = useStyles()
+    const theme = useTheme()
+    console.log('theme', theme)
 
-  return (
-    <Typography
-      gutterBottom
-      classes={{
-        gutterBottom: classes.gutterBottom
-      }}
-      {...props}
-    >
-      {title}
-    </Typography>
-  )
+    return (
+        <Typography
+            gutterBottom
+            classes={{
+                gutterBottom: classes.gutterBottom
+            }}
+            {...props}
+        >
+            {title}
+        </Typography>
+    )
 }
 
 CoolTypography.propTypes = {
-  title: PropTypes.string
+    title: PropTypes.string
 }
 
 export default CoolTypography
