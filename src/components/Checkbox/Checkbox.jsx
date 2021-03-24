@@ -7,7 +7,8 @@ const Checkbox = ({ children, ...props }) => {
     return (
         <div>
             <label>
-                <input type="checkbox"
+                <input
+                    type="checkbox"
                     {...field}
                     {...props}
                 />
