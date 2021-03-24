@@ -1,5 +1,5 @@
 import React from 'react'
-import { useFormik, Form, Formik } from 'formik'
+import { Form, Formik, Field, FieldArray, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 
 import TextInput from '../TextInput/TextInput'
@@ -68,7 +68,12 @@ const SignupForm = (props) => {
                     bar: '',
                     baz: ''
                 },
-                friends: ['lol', 'kek']
+                friends: [
+                    {
+                        name: '',
+                        email: ''
+                    }
+                ]
             }}
             validationSchema={scheme}
             onSubmit={async (values) => {
@@ -126,16 +131,6 @@ const SignupForm = (props) => {
                         name="foo.baz"
                         type="text"
                     />
-                    <TextInput
-                        label="friends 0"
-                        name="friends[0]"
-                        type="text"
-                    />
-                    <TextInput
-                        label="friends 1"
-                        name="friends[1]"
-                        type="text"
-                    />
 
                     <div role="group"
                         aria-labelledby="checkbox-group"
@@ -171,6 +166,60 @@ const SignupForm = (props) => {
                             Two
                         </Radio>
                     </div>
+
+                    <FieldArray name="friends">
+                        {({ insert, remove, push }) => (
+                            <div>
+                                {values.friends.length > 0 &&
+                                values.friends.map((friend, index) => (
+                                    <div className="row" key={index}>
+                                        <div className="col">
+                                            <label htmlFor={`friends.${index}.name`}>Name</label>
+                                            <Field
+                                                name={`friends.${index}.name`}
+                                                placeholder="Jane Doe"
+                                                type="text"
+                                            />
+                                            <ErrorMessage
+                                                name={`friends.${index}.name`}
+                                                component="div"
+                                                className="field-error"
+                                            />
+                                        </div>
+                                        <div className="col">
+                                            <label htmlFor={`friends.${index}.email`}>Email</label>
+                                            <Field
+                                                name={`friends.${index}.email`}
+                                                placeholder="jane@acme.com"
+                                                type="email"
+                                            />
+                                            <ErrorMessage
+                                                name={`friends.${index}.name`}
+                                                component="div"
+                                                className="field-error"
+                                            />
+                                        </div>
+                                        <div className="col">
+                                            <button
+                                                type="button"
+                                                className="secondary"
+                                                onClick={() => remove(index)}
+                                            >
+                                                X
+                                            </button>
+                                        </div>
+                                    </div>
+                                ))}
+                                <button
+                                    type="button"
+                                    className="secondary"
+                                    onClick={() => push({ name: '', email: '' })}
+                                >
+                                    Add Friend
+                                </button>
+                            </div>
+                        )}
+                    </FieldArray>
 
                     <button
                         type="submit"
